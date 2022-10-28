@@ -1,9 +1,8 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Scanner;
-
-import com.mysql.cj.Query;
 
 public class Surveys {
     public void Survey(Statement statement) {
@@ -34,15 +33,17 @@ public class Surveys {
                 System.out.println(resultSet.getString("QUESITONS"));
                 String uid = resultSet.getString("QUESTIONS_UID");
                 // 설문 문항에 맞는 설문 답항 출력
-                query = "SELECT example_list.EXAMPLE_UID, example_list.EXAMPLE, example_list.ORDERS "+
-                "FROM answers INNER JOIN example_list "+
-                    "ON answers.EXAMPLE_UID = example_list.EXAMPLE_UID "+
-                    "WHERE QUESTIONS_UID = '"+uid+"' "+
-                "ORDER BY ORDERS";
+                query = "SELECT example_list.EXAMPLE_UID, example_list.EXAMPLE, example_list.ORDERS " +
+                        "FROM answers INNER JOIN example_list " +
+                        "ON answers.EXAMPLE_UID = example_list.EXAMPLE_UID " +
+                        "WHERE QUESTIONS_UID = '" + uid + "' " +
+                        "ORDER BY ORDERS";
                 ResultSet resultSet2 = statement.executeQuery(query);
-                while(resultSet2.next()){
+                ArrayList arrayList = new ArrayList<>();
+                while (resultSet2.next()) {
                     System.out.println(resultSet2.getInt("ORDERS") + ". ");
-                System.out.println(resultSet2.getString("EXAMPLE"));
+                    System.out.println(resultSet2.getString("EXAMPLE"));
+                    arrayList.add();
                 }
                 // 설문자 답 받기
                 System.out.println("응답 번호 : ");
